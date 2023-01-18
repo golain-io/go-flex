@@ -23,7 +23,7 @@ func (p part) ToFlux() (flux string, args []interface{}, err error) {
 	case nil:
 		// no-op
 	case Fluxer:
-		flux, args, err = nestedToSql(pred)
+		flux, args, err = nestedToFlux(pred)
 	case string:
 		flux = pred
 		args = p.args
@@ -33,7 +33,7 @@ func (p part) ToFlux() (flux string, args []interface{}, err error) {
 	return
 }
 
-func nestedToSql(f Fluxer) (string, []interface{}, error) {
+func nestedToFlux(f Fluxer) (string, []interface{}, error) {
 	// @TODO: Do we need rawFluxer?
 	// if raw, ok := f.(rawSqlizer); ok {
 	// 	return raw.toSqlRaw()
@@ -41,9 +41,9 @@ func nestedToSql(f Fluxer) (string, []interface{}, error) {
 	return f.ToFlux()
 }
 
-func appendToSql(parts []Fluxer, w io.Writer, sep string, args []interface{}) ([]interface{}, error) {
+func appendToFlux(parts []Fluxer, w io.Writer, sep string, args []interface{}) ([]interface{}, error) {
 	for i, p := range parts {
-		partSql, partArgs, err := nestedToSql(p)
+		partSql, partArgs, err := nestedToFlux(p)
 		if err != nil {
 			return nil, err
 		} else if len(partSql) == 0 {

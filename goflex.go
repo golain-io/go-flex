@@ -3,6 +3,7 @@ package goflex
 import (
 	"context"
 	"fmt"
+	"io"
 
 	influxapi "github.com/influxdata/influxdb-client-go/v2/api"
 )
@@ -32,4 +33,10 @@ func QueryWith(api *influxapi.QueryAPI, f Fluxer) (res *influxapi.QueryTableResu
 		return
 	}
 	return (*api).Query(context.Background(), query)
+}
+
+// takes a filterData struct and appends it to the passed query string
+func addFilter(f filterData, w io.Writer) error {
+	// @TODO
+	return nil
 }
