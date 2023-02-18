@@ -1,3 +1,6 @@
+# DEPRECATED 
+Replaced by: https://github.com/golain-io/go-fluxbuilder
+
 # Go-Flex
 Standardised Query Builder for FluxQL (InfluxDB 2.x)  
 Heavily inspired by github.com/Masterminds/squirrel  
